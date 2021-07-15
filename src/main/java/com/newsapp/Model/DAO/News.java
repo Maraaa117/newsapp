@@ -1,6 +1,9 @@
 package com.newsapp.Model.DAO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -27,6 +30,15 @@ public class News {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "title")
+    private String title;
+    @Column(name = "content")
+    private String content;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @Column(name = "posting_date")
+    private LocalDate postingDate;
+
     @OneToMany(mappedBy = "news", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comment> commentsList;
 
@@ -35,15 +47,19 @@ public class News {
 
     }
 
-    public News(int id_news, int likes, int readingTime, String author, String URL, String type, List<Comment> commentsList) {
+    public News(int id_news, int likes, int readingTime, String author, String URL, String type, String title, String content, LocalDate postingDate, List<Comment> commentsList) {
         this.id_news = id_news;
         this.likes = likes;
         this.readingTime = readingTime;
         this.author = author;
         this.URL = URL;
         this.type = type;
+        this.title = title;
+        this.content = content;
+        this.postingDate = postingDate;
         this.commentsList = commentsList;
     }
+
 
     public int getId_news() {
         return id_news;
@@ -93,12 +109,36 @@ public class News {
         this.type = type;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public List<Comment> getCommentsList() {
         return commentsList;
     }
 
     public void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
+    }
+
+    public LocalDate getPostingDate() {
+        return postingDate;
+    }
+
+    public void setPostingDate(LocalDate postingDate) {
+        this.postingDate = postingDate;
     }
 
     @Override
@@ -110,6 +150,9 @@ public class News {
                 ", author='" + author + '\'' +
                 ", URL='" + URL + '\'' +
                 ", type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", postingDate=" + postingDate +
                 ", commentsList=" + commentsList +
                 '}';
     }
