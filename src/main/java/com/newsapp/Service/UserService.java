@@ -4,7 +4,8 @@ import com.newsapp.Model.DAO.User;
 import com.newsapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -21,19 +22,31 @@ public class UserService {
         }
     }
 
-    public String showUser(User user) {
-        return "";
+    public List<User> getUsers() {
+        return this.userRepository.findAll();
     }
-    public String updateUser(User user) {
-        return "";
+
+
+    public String updateUser(User user, int id) {
+        User oldUser = userRepository.findById(id).get();
+
+        oldUser.setFirstname(user.getFirstname());
+        oldUser.setLastname(user.getLastname());
+        oldUser.setAge(user.getAge());
+        oldUser.setEmail(user.getEmail());
+        oldUser.setCity(user.getCity());
+        oldUser.setPassword(user.getPassword());
+        oldUser.setGender(user.getGender());
+
+        this.userRepository.save(oldUser);
+        return "User updated successfully";
     }
-    public String deleteUser(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            userRepository.delete(user);
-            return "User deleted successfully";
-        } else {
-            return "User does not exist.";
-        }
+
+
+    public String deleteUser( int id) {
+        userRepository.deleteById(id);
+        return "User deleted successfully";
+
     }
 
 }
