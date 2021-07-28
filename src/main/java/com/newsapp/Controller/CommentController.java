@@ -15,9 +15,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "/saveComment", method = RequestMethod.POST)
-    public String saveComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
+    @RequestMapping(value = "/saveComment/{idNews}/{idUser}", method = RequestMethod.POST)
+    public String saveComment(@RequestBody Comment comment, @PathVariable int idNews, @PathVariable int idUser) {
+        return commentService.saveComment(comment, idNews, idUser);
     }
 
     @RequestMapping(value = "/getComments", method = RequestMethod.GET)

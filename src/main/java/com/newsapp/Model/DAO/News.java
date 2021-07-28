@@ -1,6 +1,8 @@
 package com.newsapp.Model.DAO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "news")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_news")
 public class News {
 
     @Id
