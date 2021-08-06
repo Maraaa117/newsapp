@@ -43,6 +43,12 @@ public class News {
     @Column(name = "posting_date")
     private LocalDate postingDate;
 
+    @Column(name = "imageUrl")
+    private String imageUrl;
+
+    @Column(name = "comments")
+    private String comments;
+
     @OneToMany(mappedBy = "news", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comment> commentsList;
 
@@ -145,11 +151,28 @@ public class News {
         this.postingDate = postingDate;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "News{" +
                 "id_news=" + id_news +
                 ", likes=" + likes +
+                ", comments=" + comments +
                 ", readingTime=" + readingTime +
                 ", author='" + author + '\'' +
                 ", URL='" + URL + '\'' +
@@ -157,6 +180,7 @@ public class News {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", postingDate=" + postingDate +
+                ", imageUrl=" + imageUrl +
                 ", commentsList=" + commentsList +
                 '}';
     }

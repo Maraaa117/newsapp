@@ -32,6 +32,8 @@ public class NewsService {
         oldNews.setReadingTime(news.getReadingTime());
         oldNews.setType(news.getType());
         oldNews.setURL(news.getURL());
+        oldNews.setImageUrl(news.getImageUrl());
+        oldNews.setComments(news.getComments());
 
         this.newsRepository.save(oldNews);
         return "News updated successfully";
