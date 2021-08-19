@@ -36,6 +36,9 @@ public class User {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "isadmin")
+    private boolean isadmin;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Comment> commentsList;
 
@@ -43,7 +46,7 @@ public class User {
 
     }
 
-    public User(int id_user, String firstname, String lastname, String email, String password, int age, String gender, String city, List<Comment> commentsList) {
+    public User(int id_user, String firstname, String lastname, String email, String password, int age, String gender, String city, boolean isadmin, List<Comment> commentsList) {
         this.id_user = id_user;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -52,6 +55,7 @@ public class User {
         this.age = age;
         this.gender = gender;
         this.city = city;
+        this.isadmin = isadmin;
         this.commentsList = commentsList;
     }
 
@@ -119,6 +123,14 @@ public class User {
         this.city = city;
     }
 
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
+
     public List<Comment> getCommentsList() {
         return commentsList;
     }
@@ -138,6 +150,7 @@ public class User {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", city='" + city + '\'' +
+                ", isadmin='" + isadmin + '\'' +
                 ", commentsList=" + commentsList +
                 '}';
     }

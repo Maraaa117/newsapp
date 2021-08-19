@@ -24,6 +24,9 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @RequestMapping(value = "/getUserByEmail/{email}", method = RequestMethod.GET)
+    public User getUserByEmail(@PathVariable String email) { return userService.getUserByEmail(email);}
+
     @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
     public String updateUsers(@RequestBody User user, @PathVariable int id) {
         return userService.updateUser(user,id);

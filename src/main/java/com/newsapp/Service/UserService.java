@@ -26,6 +26,16 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public User getUserByEmail(String email) {
+        if ( userRepository.existsByEmail(email)) {
+            System.out.println("A mers.");
+            return userRepository.findByEmail(email);
+        } else {
+            System.out.println("Nu a mers");
+            return null;
+        }
+    }
+
 
     public String updateUser(User user, int id) {
         User oldUser = userRepository.findById(id).get();
